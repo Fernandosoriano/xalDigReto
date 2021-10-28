@@ -14,8 +14,8 @@ inner join
 inner join 
     movimientos movi on movi.ID_MOVIMIENTO = vue.ID_MOVIMIENTO;
 #####################################################################################
-#QUERY2 en el que genero la vista de mi query1, este query me genera una 
-#especie de tabla virtual a la que haré las cocnultas para responder
+#QUERY2 en el que genero la vista de mi query1, aquí genero una 
+#especie de tabla virtual a la que haré las consultas para responder
 #las preguntas
 CREATE OR REPLACE VIEW resultadosFinales as 
 SELECT aerli.NOMBRE_AEROLINEA, 
@@ -27,7 +27,7 @@ inner join aeropuertos aerpu on aerpu.ID_AEROPUERTO = vue.ID_AEROPUERTO
 inner join movimientos movi on movi.ID_MOVIMIENTO = vue.ID_MOVIMIENTO
 
 ###########################################################################################
-#QUERY3 para obtener la nombre de aerolinea que más aparece, y por ende tiene mayor
+#QUERY3 para obtener el nombre de la aerolinea que más aparece, y por ende tiene mayor
 #movimiento
 SELECT       
     NOMBRE_AEROPUERTO,
