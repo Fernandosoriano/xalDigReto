@@ -1,0 +1,70 @@
+#QUERY1 que sirve para generar la tabla que contiene la info
+#necesaria para responder las preguntas, y que usare en mi creación
+#de una vista en mi siguiente query
+SELECT 
+    aerli.NOMBRE_AEROLINEA, 
+    aerpu.NOMBRE_AEROPUERTO,   # aquí se debe corregitr la tabla pues la clolumna dice NOMBRE_AEROLINEA, cuando considero debe ser NOMBRE_AEROPUERTO
+    movi.DESCRIPCION, vue.DIA 
+FROM 
+    vuelos vue 
+inner join 
+    aerolineas aerli on vue.ID_AEROLINEA = aerli.ID_AEROLINEA
+inner join 
+    aeropuertos aerpu on aerpu.ID_AEROPUERTO = vue.ID_AEROPUERTO 
+inner join 
+    movimientos movi on movi.ID_MOVIMIENTO = vue.ID_MOVIMIENTO;
+#####################################################################################
+#QUERY2 en el que genero la vista de mi query1, este query me genera una 
+#especie de tabla virtual a la que haré las cocnultas para responder
+#las preguntas
+CREATE OR REPLACE VIEW resultadosFinales as 
+SELECT aerli.NOMBRE_AEROLINEA, 
+       aerpu.NOMBRE_AEROPUERTO, 
+       movi.DESCRIPCION, vue.DIA 
+FROM vuelos vue 
+inner join aerolineas aerli on vue.ID_AEROLINEA = aerli.ID_AEROLINEA 
+inner join aeropuertos aerpu on aerpu.ID_AEROPUERTO = vue.ID_AEROPUERTO 
+inner join movimientos movi on movi.ID_MOVIMIENTO = vue.ID_MOVIMIENTO
+
+###########################################################################################
+#QUERY3 para obtener la nombre de aerolinea que más aparece, y por ende tiene mayor
+#movimiento
+SELECT       
+    NOMBRE_AEROPUERTO,
+    COUNT(NOMBRE_AEROPUERTO) AS value_occurrence
+    
+FROM     
+   resultadosFinales
+GROUP BY 
+    NOMBRE_AEROPUERTO
+ORDER BY 
+    value_occurrence DESC
+LIMIT    1;
+################################################################################################
+#QUERY4 para obtener el nombre de la aerolínea que  ha tenido mayor número de vuelos
+
+SELECT       
+    NOMBRE_AEROLINEA,
+    COUNT(NOMBRE_AEROLINEA) AS value_occurrence
+    
+FROM     
+   resultadosFinales
+GROUP BY 
+    NOMBRE_AEROLINEA
+ORDER BY 
+    value_occurrence DESC
+LIMIT    1;
+#####################################################################################################3
+#QUERY5 para obtener el día en que se han tenido mayor número de vuelos
+
+SELECT       
+    DIA,
+    COUNT(DIA) AS value_occurrence
+    
+FROM     
+   resultadosFinales
+GROUP BY 
+    DIA
+ORDER BY 
+    value_occurrence DESC
+LIMIT    1;
