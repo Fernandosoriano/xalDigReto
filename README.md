@@ -1,7 +1,7 @@
 # xalDigReto
 
 # PROGRAMACIÓN
-EL reto de programación lo resolví usndo python, y para poder
+El reto de programación lo resolví usando python, y para poder
 ver el resultado, es necesario hacer lo siguiente:
 
 1.-Instalar la libreria requests de python,
